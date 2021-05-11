@@ -45,6 +45,8 @@ const nounourses = [
     imageUrl: "http://oc-p5-api.herokuapp.com/images/teddy_5.jpg",
   },
 ];
+
+
 function afficherNomDesNounours(array) {
   for (let elem of array) {
     console.log(elem.name);
@@ -63,11 +65,41 @@ function afficherPrixTotal(array) {
 
 afficherPrixTotal(nounourses);
 
-
-function afficherColorisDisponibles(array) {
-    for (let elem of array) {
-        console.log(elem.colors);
-      }
+function afficherMoitiePrix(array) {
+  for (let elem of array) {
+    console.log('Le nounours ' + elem.name + ' à -50% est à ' + elem.price/2 + '€');
+  }
 }
 
-afficherColorisDisponibles(nounourses)
+  afficherMoitiePrix(nounourses)
+
+function afficherColorisDisponibles(array) {
+  for (let elem of array) {
+    console.log('Le nounours ' + elem.name + ' est disponible en ' + elem.colors.length + ' couleurs');
+  }
+}
+
+afficherColorisDisponibles(nounourses);
+
+function afficherSuperieurTrente(array) {
+
+  for(let elem of array) {
+    if(elem.price > 3000) {
+        console.log(elem.name + ' coûte + de 30€, il coûte ' + elem.price + '€')
+    } else {
+    }
+}
+}
+
+afficherSuperieurTrente(nounourses)
+
+
+function afficherSommeDescriptions(array) {
+  let sum = "";
+  for (let elem of array) {
+    sum += elem.description;
+  }
+  console.log(sum);
+}
+
+afficherSommeDescriptions(nounourses)
