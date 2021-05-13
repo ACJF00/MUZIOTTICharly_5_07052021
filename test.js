@@ -58,7 +58,7 @@ afficherNomDesNounours(nounourses);
 function afficherPrixTotal(array) {
     let sum = 0;
   for (let elem of array) {
-    sum += elem.price;
+    sum += elem.price/100;
   }
   console.log('Prix total',sum);
 }
@@ -67,7 +67,7 @@ afficherPrixTotal(nounourses);
 
 function afficherMoitiePrix(array) {
   for (let elem of array) {
-    console.log('Le nounours ' + elem.name + ' à -50% est à ' + elem.price/2 + '€');
+    console.log('Le nounours ' + elem.name + ' à -50% est à ' + (elem.price/100)/2 + '€');
   }
 }
 
@@ -85,7 +85,7 @@ function afficherSuperieurTrente(array) {
 
   for(let elem of array) {
     if(elem.price > 3000) {
-        console.log(elem.name + ' coûte + de 30€, il coûte ' + elem.price + '€')
+        console.log(elem.name + ' coûte + de 30€, il coûte ' + elem.price/100 + '€')
     } else {
     }
 }
@@ -103,3 +103,12 @@ function afficherSommeDescriptions(array) {
 }
 
 afficherSommeDescriptions(nounourses)
+
+
+function afficherNounoursNameParagraphe(array) {
+  for (let elem of array) {
+    console.log(<p>${elem.name}</p>)
+  }
+}
+
+afficherNounoursNameParagraphe(nounourses)
