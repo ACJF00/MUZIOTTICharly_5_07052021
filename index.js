@@ -1,17 +1,29 @@
-const content = document.getElementById('content')
 
-function remplirListeProduits(nounours) {
-    // loop here to display nounourses names
-    for (let elem of nounours) {
-        content.innerHTML +=
-        "<h1>${elem.name}</h1>";
+async function fillProducts() {
+    await fetch('http://localhost:3000/api/teddies')
+      .then((response) => response.json())
+      .then((nounours) => {
+        for (let elem of nounours) {
+          let products = document.getElementById('products')
+          let divIntrermediaire = document.createElement('div')
+
+          let paragraphe = document.createElement('p')
+          paragraphe.innerText = elem.name
+
+          let prix = document.createElement('p')
+          prix.innerText = elem.name + " coûte " + elem.price/100 + " €"
+
+          let image = document.createElement('img')
+          image.src = elem.imageUrl
+
+          divIntrermediaire.appendChild(paragraphe)
+          divIntrermediaire.appendChild(prix)
+          divIntrermediaire.appendChild(image)
+
+          products.appendChild(divIntrermediaire)
+
+        }
+      })
     }
-  }
-  
-  async function fillProducts() {
-    await fetch('http://localhost:3000/api/teddies') // will return info, but in wrong format
-      .then((response) => response.json()) // will return info, in json format
-      .then((nounours) => remplirListeProduits(nounours)) // main code here, using json info
-  }
-
+       
   fillProducts()
