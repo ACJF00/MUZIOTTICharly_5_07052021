@@ -5,6 +5,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 2em;
 }
 
 nav {
@@ -26,24 +27,57 @@ nav ul a {
   font-size: 1.5em;
 }
 
-.products {
+.content {
+  width: 100%;
   display: flex;
-  margin: 0 2 3 4em;
-  margin-left: 31em;
-  flex-wrap: wrap;
   justify-content: center;
+}
+.content .products {
+  display: flex;
+  flex-wrap: wrap;
   width: 50%;
+  height: 95em;
+  justify-content: space-around;
 }
-.products div {
-  width: 26em;
+.content .products div {
+  width: 47%;
   align-items: center;
+  background-color: #DCDCDC;
+  border-radius: 10px 10px 10px 10px;
+  height: 29%;
 }
-.products div p {
+.content .products div h1 {
+  text-align: center;
+  font-size: 1.5em;
+}
+.content .products div p {
   text-align: center;
 }
-.products img {
+.content .products div img {
   width: 100%;
   text-align: center;
+  height: 63%;
+  object-fit: cover;
+  border-radius: 0px 0px 10px 10px;
+}
+.content .products div button {
+  border-radius: 10px 10px 10px 10px;
+  border: none;
+  padding: 0.7em;
+}
+.content .products div a {
+  text-decoration: none;
+}
+
+footer {
+  width: 100%;
+  height: 9em;
+  background-color: #002EF5;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: center;
+  margin-top: 2em;
 }
 
 /*# sourceMappingURL=style.css.map */

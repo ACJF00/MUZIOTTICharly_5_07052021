@@ -7,7 +7,7 @@ async function fillProducts() {
           let products = document.getElementById('products')
           let divIntrermediaire = document.createElement('div')
 
-          let paragraphe = document.createElement('p')
+          let paragraphe = document.createElement('h1')
           paragraphe.innerText = elem.name
 
           let prix = document.createElement('p')
@@ -16,9 +16,14 @@ async function fillProducts() {
           let image = document.createElement('img')
           image.src = elem.imageUrl
 
+          let button = document.createElement('p')
+          button.innerHTML = '<button><a href="./pages/produit.html/'+elem._id +'">Voir le produit</a></button>'
+         
+
           divIntrermediaire.appendChild(paragraphe)
           divIntrermediaire.appendChild(prix)
           divIntrermediaire.appendChild(image)
+          divIntrermediaire.appendChild(button)
 
           products.appendChild(divIntrermediaire)
 

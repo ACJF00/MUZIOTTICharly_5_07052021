@@ -6,6 +6,7 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 2em;
 }
 
 nav{
@@ -26,23 +27,57 @@ nav{
     }
 }
 }
-
-.products {
-    display: flex;
-    margin: 0 2 3 4em;
-    margin-left: 31em;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 50%;
-    div{
-        width: 26em;
-        align-items: center;
-        p{
-            text-align: center;
-        }
-    }
-   img {
+.content{
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+            height: 95em;
+            justify-content: space-around;
+            div{
+                width: 47%;
+                align-items: center;
+                background-color: #DCDCDC;
+                border-radius: 10px 10px 10px 10px;
+                height: 29%;
+                h1{
+                    text-align: center;
+                    font-size: 1.5em;
+                }
+                p{
+                    text-align: center;
+                }
+        img {
+            width: 100%;
+            text-align: center;
+            height: 63%;
+            object-fit: cover;
+            border-radius: 0px 0px 10px 10px;
+            }
+        button{
+            border-radius: 10px 10px 10px 10px;
+            border: none;
+            padding: 0.7em;
+        }
+        a{
+            text-decoration: none;
+        }    
+        }
+
     }
+}
+
+
+footer{
+    width: 100%;
+    height: 9em;
+    background-color: #002EF5;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    margin-top: 2em;
 }
