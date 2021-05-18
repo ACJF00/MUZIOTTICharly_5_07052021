@@ -17,7 +17,7 @@ async function fillProducts() {
           image.src = elem.imageUrl
 
           let button = document.createElement('p')
-          button.innerHTML = '<button><a href="./pages/produit.html/'+elem._id +'">Voir le produit</a></button>'
+          button.innerHTML = '<button><a href="./produit.html?'+elem._id +'">Voir le produit</a></button>'
          
 
           divIntrermediaire.appendChild(paragraphe)
