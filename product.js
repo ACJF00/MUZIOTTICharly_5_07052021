@@ -1,7 +1,41 @@
-let urlWithParameters = window.location.search; // On récupère les paramètre d'url, donc l'id
-let urlParameters = new URLSearchParams(urlWithParameters); // On utilise l'interface URLSearchParams pour détacher les paramètres
-let idProduct = urlParameters.get("_id"); // On récupère l'id
+const getId = window.location.search;
+console.log(getId);
 
-get("http://localhost:3000/api/teddies/" + idProduct) // On fait une requête pour obtenir la peluche correspondant à l'id récupérée
+const urlParams = new URLSearchParams(getId);
 
-console.log(idProduct)
+const product = urlParams.get('name')
+console.log(product);
+
+async function fillProducts() {
+    await fetch('http://localhost:3000/api/teddies' + urlParams)
+      .then((response) => response.json())
+      .then((nounours) => {
+        for (let elem of nounours) {
+          let products = document.getElementById('products')
+          let divIntrermediaire = document.createElement('div')
+
+          let paragraphe = document.createElement('h1')
+          paragraphe.innerText = console.log(product);
+
+          let prix = document.createElement('p')
+          prix.innerText = elem.name + " coûte " + elem.price/100 + " €"
+
+          let image = document.createElement('img')
+          image.src = elem.imageUrl
+
+          let button = document.createElement('p')
+          button.innerHTML = '<button><a href="./produit.html?'+elem._id +'">Voir le produit</a></button>'
+         
+
+          divIntrermediaire.appendChild(paragraphe.elem.name)
+          divIntrermediaire.appendChild(prix)
+          divIntrermediaire.appendChild(image)
+          divIntrermediaire.appendChild(button)
+
+          products.appendChild(divIntrermediaire)
+
+        }
+      })
+    }
+       
+  fillProducts()
