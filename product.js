@@ -1,41 +1,62 @@
 const getId = window.location.search;
 console.log(getId);
-
 const urlParams = new URLSearchParams(getId);
-
-const product = urlParams.get('name')
+const product = urlParams.get("_id");
 console.log(product);
 
-async function fillProducts() {
-    await fetch('http://localhost:3000/api/teddies' + urlParams)
-      .then((response) => response.json())
-      .then((nounours) => {
-        for (let elem of nounours) {
-          let products = document.getElementById('products')
-          let divIntrermediaire = document.createElement('div')
 
-          let paragraphe = document.createElement('h1')
-          paragraphe.innerText = console.log(product);
+async function teddyDetails() {
+  await fetch(`http://localhost:3000/api/teddies/${product}`)
+    .then((response) => response.json())
+    .then((teddyInfos) => {
+    let products = document.getElementById('products')
 
-          let prix = document.createElement('p')
-          prix.innerText = elem.name + " coûte " + elem.price/100 + " €"
+    let teddyName = document.createElement('h1')
+    let teddyPrice = document.createElement('p')
+    let image = document.createElement('img')
+    let teddyDescription = document.createElement('p')
 
-          let image = document.createElement('img')
-          image.src = elem.imageUrl
+    teddyName.textContent = teddyInfos.name;
+    teddyPrice.textContent = "Prix : " + teddyInfos.price/100 + '€';
+    image.src = teddyInfos.imageUrl;
+    teddyDescription.textContent = teddyInfos.description;
 
-          let button = document.createElement('p')
-          button.innerHTML = '<button><a href="./produit.html?'+elem._id +'">Voir le produit</a></button>'
-         
+    products.append(teddyName, teddyPrice,image, teddyDescription)
 
-          divIntrermediaire.appendChild(paragraphe.elem.name)
-          divIntrermediaire.appendChild(prix)
-          divIntrermediaire.appendChild(image)
-          divIntrermediaire.appendChild(button)
+    
+    
+    
+    
+    let colors = teddyInfos.colors
+    for (let color of colors) {
+      let selectColor = document.getElementById('selectColor')
 
-          products.appendChild(divIntrermediaire)
+      let colorOption = document.createElement('option')
+      colorOption.innerText = `${color}`
 
-        }
-      })
+      selectColor.appendChild(colorOption)
+
     }
-       
-  fillProducts()
+
+
+
+
+
+     let cartButton = document.createElement('p')
+     cartButton.innerHTML = `<button id="addCart">Ajouter au panier</button>`
+     products.appendChild(cartButton)
+
+  
+     let colorValue = document.getElementById('selectColor').value
+     
+     cartButton.onclick = function() {
+       localStorage.setItem('name', teddyInfos.name)
+       localStorage.setItem('color', colorValue)
+       localStorage.setItem('price', teddyInfos.price/100 + "€")
+       console.log(localStorage)
+     }
+
+    })
+}
+
+teddyDetails(product)
