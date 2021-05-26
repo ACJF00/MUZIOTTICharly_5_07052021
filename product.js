@@ -5,6 +5,8 @@ const product = urlParams.get("_id");
 console.log(product);
 
 
+
+
 async function teddyDetails() {
   await fetch(`http://localhost:3000/api/teddies/${product}`)
     .then((response) => response.json())
@@ -50,10 +52,36 @@ async function teddyDetails() {
      let colorValue = document.getElementById('selectColor').value
      
      cartButton.onclick = function() {
+      
+      let tableau = [
+        "Charly",
+        "Paul",
+        "Sophie",
+      ]
+
+      let objet = {
+        name: "Charly",
+        age: 30,
+        country: "France"
+      }
+
+      let tableauString = JSON.stringify(tableau)
+      let objetString = JSON.stringify(objet)
+
        localStorage.setItem('name', teddyInfos.name)
        localStorage.setItem('color', colorValue)
        localStorage.setItem('price', teddyInfos.price/100 + "€")
+       localStorage.setItem('tableau', tableauString)
+       localStorage.setItem('objet', objetString)
        console.log(localStorage)
+
+       let recup = localStorage.getItem("tableau")
+       let recupTableau = JSON.parse(recup)
+       console.log(recupTableau[1])
+
+       let recupO = localStorage.getItem("objet")
+       let recupObject = JSON.parse(recupO)
+       console.log(recupObject)
      }
 
     })
