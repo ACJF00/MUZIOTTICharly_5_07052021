@@ -5,7 +5,21 @@ const product = urlParams.get("_id");
 console.log(product);
 
 
+function clearCart() {
+  localStorage.clear()
+}
 
+function createCart() {
+  localStorage.setItem("panier", JSON.stringify([]))
+}
+
+function fillCart() {
+  let panier = localStorage.getItem("panier")
+  panier = JSON.parse(panier)
+  let nounours = {name: "Norbert", color: "black"}
+  panier.push(nounours)
+  localStorage.setItem("panier", JSON.stringify(panier))
+}
 
 async function teddyDetails() {
   await fetch(`http://localhost:3000/api/teddies/${product}`)
