@@ -29,6 +29,8 @@ nav{
 }
 
 .content{
+    display: flex;
+    flex-direction: column;
     .products{
         width: 100%;
         display: flex;
@@ -47,6 +49,12 @@ nav{
             justify-items: center;
             font-size: 1.1em;
         }
+    }
+    button{
+        max-width: fit-content;
+        align-self: center;
+        margin-top: 3em;
+        font-size: 1em;
     }
 }
 

@@ -5,22 +5,6 @@ const product = urlParams.get("_id");
 console.log(product);
 
 
-function clearCart() {
-  localStorage.clear()
-}
-
-function createCart() {
-  localStorage.setItem("panier", JSON.stringify([]))
-}
-
-function fillCart() {
-  let panier = localStorage.getItem("panier")
-  panier = JSON.parse(panier)
-  let nounours = {name: "Norbert", color: "black"}
-  panier.push(nounours)
-  localStorage.setItem("panier", JSON.stringify(panier))
-}
-
 async function teddyDetails() {
   await fetch(`http://localhost:3000/api/teddies/${product}`)
     .then((response) => response.json())
@@ -37,7 +21,7 @@ async function teddyDetails() {
     image.src = teddyInfos.imageUrl;
     teddyDescription.textContent = teddyInfos.description;
 
-    products.append(teddyName, teddyPrice,image, teddyDescription)
+    products.append(teddyName, teddyPrice, image, teddyDescription)
 
     
     
@@ -54,30 +38,18 @@ async function teddyDetails() {
 
     }
 
+    let colorValue = document.getElementById('selectColor').value
 
 
-
-
+/**
      let cartButton = document.createElement('p')
      cartButton.innerHTML = `<button id="addCart">Ajouter au panier</button>`
      products.appendChild(cartButton)
 
   
-     let colorValue = document.getElementById('selectColor').value
-     
-     cartButton.onclick = function() {
-      
-      let tableau = [
-        "Charly",
-        "Paul",
-        "Sophie",
-      ]
 
-      let objet = {
-        name: "Charly",
-        age: 30,
-        country: "France"
-      }
+     
+      cartButton.onclick = function() {
 
       let tableauString = JSON.stringify(tableau)
       let objetString = JSON.stringify(objet)
@@ -97,8 +69,27 @@ async function teddyDetails() {
        let recupObject = JSON.parse(recupO)
        console.log(recupObject)
      }
+     **/
+
+    document.getElementById('fillCart').onclick = function() {fillCart()}
+   
+    function fillCart() {
+     let nounours = {
+        name: `${teddyInfos.name}`,
+        price: `${teddyInfos.price/100}`,
+        color: `${document.getElementById('selectColor').value}`
+      }
+      
+      let panier = localStorage.getItem("panier")
+      panier = JSON.parse(panier)
+      panier.push (nounours)
+      localStorage.setItem("panier", JSON.stringify(panier))
+
+    confirm(`Voulez-vous ajouter ${teddyInfos.name} au panier`)
+    }
+
 
     })
-}
+  }
 
 teddyDetails(product)

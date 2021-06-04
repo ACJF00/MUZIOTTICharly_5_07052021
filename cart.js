@@ -9,4 +9,18 @@ let teddyPrice = localStorage.getItem('price')
 let teddyColor = localStorage.getItem('color')
 console.log(teddyName, teddyPrice, teddyColor)
 
-productsList.append(teddyName, teddyPrice, teddyColor)
+
+
+
+
+document.getElementById('clearCart').onclick = function() {clearCart()}
+function clearCart() {
+      localStorage.clear()
+      localStorage.setItem("panier", JSON.stringify([]))
+      document.location.reload()
+    }
+
+  /** document.getElementById('createCart').onclick = function() {createCart()}
+    function createCart() {
+
+    } */ 

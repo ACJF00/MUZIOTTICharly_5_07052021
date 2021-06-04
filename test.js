@@ -112,3 +112,21 @@ function afficherNounoursNameParagraphe(array) {
 }
 
 afficherNounoursNameParagraphe(nounourses)
+
+
+
+
+Exemples fabien
+
+let tableau = [
+  "Charly",
+  "Paul",
+  "Sophie",
+]
+
+let objet = {
+  name: "Charly",
+  age: 30,
+  country: "France"
+}
+
