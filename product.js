@@ -5,6 +5,23 @@ const product = urlParams.get("_id");
 console.log(product);
 
 
+
+function fillCart(teddyInfos) {
+  let nounours = {
+     name: `${teddyInfos.name}`,
+     price: `${teddyInfos.price}`,
+     color: `${document.getElementById('selectColor').value}`
+   }
+   
+   let panier = localStorage.getItem("panier")
+   panier = JSON.parse(panier)
+   panier.push (nounours)
+   localStorage.setItem("panier", JSON.stringify(panier))
+   document.location(panier.html).reload()
+ }
+
+
+
 async function teddyDetails() {
   await fetch(`http://localhost:3000/api/teddies/${product}`)
     .then((response) => response.json())
@@ -71,24 +88,7 @@ async function teddyDetails() {
      }
      **/
 
-    document.getElementById('fillCart').onclick = function() {fillCart()}
-   
-    function fillCart() {
-     let nounours = {
-        name: `${teddyInfos.name}`,
-        price: `${teddyInfos.price/100}`,
-        color: `${document.getElementById('selectColor').value}`
-      }
-      
-      let panier = localStorage.getItem("panier")
-      panier = JSON.parse(panier)
-      panier.push (nounours)
-      localStorage.setItem("panier", JSON.stringify(panier))
-
-    confirm(`Voulez-vous ajouter ${teddyInfos.name} au panier`)
-    }
-
-
+    document.getElementById('fillCart').onclick = function() {fillCart(teddyInfos)}
     })
   }
 

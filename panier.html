@@ -3,7 +3,7 @@
    <head>
       <!-- En-tête de la page -->
       <meta charset="utf-8" />
-      <link rel="stylesheet" href="./css/product.css" />
+      <link rel="stylesheet" href="./css/cart.css" />
       <script src="https://kit.fontawesome.com/84f87a4f79.js" crossorigin="anonymous"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="icon" href="./images/favicon.png" />
@@ -24,8 +24,25 @@
       </header>
       <!-- HEADER -->
 <div class="content">
-   <div class="productsList" id="productsList"></div>
+   <div class="cartResume" id="cartResume">
+      <div id="productDetails"></div>
+   </div>
+   <div id="totalPrice"></div>
    <button id="clearCart" onclick="clearCart()">Vider panier</button>
+</div>
+
+<div id="form">
+   <label for="nom">Prénom</label>
+   <input type="text" id="firstName" placeholder="Prénom">
+   <label for="nom">Nom</label>
+   <input type="text" id="lastName" placeholder="Nom">
+   <label for="nom">Email</label>
+   <input type="text" id="email" placeholder="Email">
+   <label for="nom">Adresse</label>
+   <input type="text" id="adress" placeholder="Adresse">
+   <label for="nom">Ville</label>
+   <input type="text" id="city" placeholder="Ville">
+   <button id="bouton">Valider le paiement</button>
 </div>
 
       <!-- FOOTER -->
