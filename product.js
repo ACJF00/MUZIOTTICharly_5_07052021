@@ -10,14 +10,14 @@ function fillCart(teddyInfos) {
   let nounours = {
      name: `${teddyInfos.name}`,
      price: `${teddyInfos.price}`,
-     color: `${document.getElementById('selectColor').value}`
+     color: `${document.getElementById('selectColor').value}`,
+     id: `${teddyInfos._id}`,
    }
    
    let panier = localStorage.getItem("panier")
    panier = JSON.parse(panier)
    panier.push (nounours)
    localStorage.setItem("panier", JSON.stringify(panier))
-   document.location(panier.html).reload()
  }
 
 
@@ -32,11 +32,13 @@ async function teddyDetails() {
     let teddyPrice = document.createElement('p')
     let image = document.createElement('img')
     let teddyDescription = document.createElement('p')
+    let teddyId = document.createElement('p')
 
     teddyName.textContent = teddyInfos.name;
     teddyPrice.textContent = "Prix : " + teddyInfos.price/100 + '€';
     image.src = teddyInfos.imageUrl;
     teddyDescription.textContent = teddyInfos.description;
+    teddyId.textContent = teddyInfos._id;
 
     products.append(teddyName, teddyPrice, image, teddyDescription)
 
@@ -93,3 +95,4 @@ async function teddyDetails() {
   }
 
 teddyDetails(product)
+

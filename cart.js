@@ -6,6 +6,7 @@ let cartImage = document.createElement("img");
 let teddyName = localStorage.getItem("name");
 let teddyPrice = localStorage.getItem("price");
 let teddyColor = localStorage.getItem("color");
+let teddyId = localStorage.getItem("id")
 
 function cartTotal() {
   const cart = localStorage.getItem("panier");
@@ -38,7 +39,7 @@ function displayTotalPrice() {
   for (let teddyPrice of teddyPrices) {
     sum += teddyPrice.price/100
   }
-  if (sum === 0) {perf
+  if (sum === 0) {
   } else {
       document.getElementById("totalPrice").innerHTML = `<h2>Prix total : ${sum} €</h2>`;
     }
@@ -63,20 +64,28 @@ function clearCart() {
 
 
 document.getElementById("bouton").onclick = function () {
-  const user = {     
+
+const order =
+  {
+    "contact" : {
     firstName : firstName.value,
     lastName : lastName.value,
     email : email.value,
     adress : adress.value,
-    city : city.value
+    city : city.value,
+  },
+    "products": [
+      teddyPrice._id
+    ]
   }
 
-  localStorage.setItem("contact", JSON.stringify(user));
+  localStorage.setItem("contact", JSON.stringify(order));
   document.location.reload
 
-  alert(`Merci ${user.prenom}, votre commande a bien été prise en compte`);
+  alert(`Merci ${firstName.value}, votre commande a bien été prise en compte`);
 
 }
+
 
 
 
