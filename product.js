@@ -16,6 +16,9 @@ function fillCart(teddyInfos) {
    
    let panier = localStorage.getItem("panier")
    panier = JSON.parse(panier)
+   if (panier === null) {
+     panier = []
+   }
    panier.push (nounours)
    localStorage.setItem("panier", JSON.stringify(panier))
  }

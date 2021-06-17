@@ -65,6 +65,15 @@ function clearCart() {
 
 document.getElementById("bouton").onclick = function () {
 
+let panier = localStorage.getItem("panier")
+panier = JSON.parse(panier)
+
+let tableauID = []
+
+for (let elem of panier){
+tableauID.push(elem.id)
+}
+
 const order =
   {
     "contact" : {
@@ -74,10 +83,10 @@ const order =
     adress : adress.value,
     city : city.value,
   },
-    "products": [
-      teddyPrice._id
-    ]
+    products: 
+      tableauID
   }
+  
 
   localStorage.setItem("contact", JSON.stringify(order));
   document.location.reload
