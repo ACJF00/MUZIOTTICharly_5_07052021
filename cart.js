@@ -49,21 +49,9 @@ displayTotalPrice()
 
 
 
+document.getElementById("submit").onclick = function () {
 
-
-
-document.getElementById("clearCart").onclick = function () {
-  clearCart();
-};
-function clearCart() {
-  localStorage.clear();
-  localStorage.setItem("panier", JSON.stringify([]));
-  document.location.reload();
-}
-
-
-
-document.getElementById("bouton").onclick = function () {
+let form = document.getElementById("form")
 
 let panier = localStorage.getItem("panier")
 panier = JSON.parse(panier)
@@ -87,20 +75,56 @@ const order =
       tableauID
   }
   
-
+  document.getElementById("clearCart").onclick = function () {
+    clearCart();
+  };
+  function clearCart() {
+    localStorage.clear();
+    localStorage.setItem("panier", JSON.stringify([]));
+    document.location.reload();
+  }
+  
+ form.addEventListener("submit", function(e){
+  
+  var erreur;
+  var firstName = document.getElementById("firstName");
+  var lastName = document.getElementById("lastName");
+  var email = document.getElementById("email");
+  var adress = document.getElementById("adress");
+  var city = document.getElementById("city");
+  
+  if (!firstName.value) {
+    erreur = "Veuillez renseigner un prénom";
+  }
+  
+  if (!lastName.value) {
+    erreur = "Veuillez renseigner un nom";
+  }
+  
+  if (!email.value) {
+    erreur = "Veuillez renseigner un email";
+  }
+  
+  if (!adress.value) {
+    erreur = "Veuillez renseigner une adresse";
+  }
+  
+  if (!city.value) {
+    erreur = "Veuillez renseigner une ville";
+  }
+  
+  if (erreur) {
+    e.preventDefault();
+    document.getElementById("erreur").innerHTML = erreur;
+    return false;
+  } else {
+    alert("Formulaire envoyé"); 
   localStorage.setItem("contact", JSON.stringify(order));
   document.location.reload
+  }
+  })
+  /*
 
-  alert(`Merci ${firstName.value}, votre commande a bien été prise en compte`);
-
+  alert(`Merci ${firstName.value}, votre commande a bien été prise en compte`);*/
 }
 
-
-
-
-
-
-/** document.getElementById('createCart').onclick = function() {createCart()}
-    function createCart() {
-
-    } */
