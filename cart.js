@@ -49,9 +49,21 @@ displayTotalPrice()
 
 
 
-document.getElementById("submit").onclick = function () {
 
-let form = document.getElementById("form")
+
+
+document.getElementById("clearCart").onclick = function () {
+  clearCart();
+};
+function clearCart() {
+  localStorage.clear();
+  localStorage.setItem("panier", JSON.stringify([]));
+  document.location.reload();
+}
+
+
+
+document.getElementById("submit").onclick = function () {
 
 let panier = localStorage.getItem("panier")
 panier = JSON.parse(panier)
@@ -74,57 +86,95 @@ const order =
     products: 
       tableauID
   }
-  
-  document.getElementById("clearCart").onclick = function () {
-    clearCart();
-  };
-  function clearCart() {
-    localStorage.clear();
-    localStorage.setItem("panier", JSON.stringify([]));
-    document.location.reload();
-  }
-  
- form.addEventListener("submit", function(e){
-  
-  var erreur;
-  var firstName = document.getElementById("firstName");
-  var lastName = document.getElementById("lastName");
-  var email = document.getElementById("email");
-  var adress = document.getElementById("adress");
-  var city = document.getElementById("city");
-  
-  if (!firstName.value) {
-    erreur = "Veuillez renseigner un prénom";
-  }
-  
-  if (!lastName.value) {
-    erreur = "Veuillez renseigner un nom";
-  }
-  
-  if (!email.value) {
-    erreur = "Veuillez renseigner un email";
-  }
-  
-  if (!adress.value) {
-    erreur = "Veuillez renseigner une adresse";
-  }
-  
-  if (!city.value) {
-    erreur = "Veuillez renseigner une ville";
-  }
-  
-  if (erreur) {
-    e.preventDefault();
-    document.getElementById("erreur").innerHTML = erreur;
-    return false;
-  } else {
-    alert("Formulaire envoyé"); 
-  localStorage.setItem("contact", JSON.stringify(order));
-  document.location.reload
-  }
-  })
-  /*
 
-  alert(`Merci ${firstName.value}, votre commande a bien été prise en compte`);*/
+  if (validateFirstName() == false)
+  {
+    return false;
+  }
+  localStorage.setItem("contact", JSON.stringify(order));
+
+  if (validateLasttName() == false)
+  {
+    return false;
+  }
+  localStorage.setItem("contact", JSON.stringify(order));
+
+
+  if (validateEmail() == false)
+  {
+    return false;
+  }
+  localStorage.setItem("contact", JSON.stringify(order));
+
+  if (validateAdress() == false)
+  {
+    return false;
+  }
+  localStorage.setItem("contact", JSON.stringify(order));
+
+  if (validateCity() == false)
+  {
+    return false;
+  }
+  localStorage.setItem("contact", JSON.stringify(order));
+
+
+alert(`Merci ${firstName.value}, votre commande a bien été prise en compte`);
+
 }
+
+function validateEmail() 
+{
+ if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email.value))
+  {
+    return (true)
+  }
+    alert("Vous avez entré une adresse email incorrecte")
+    return (false)
+}
+
+function validateFirstName()
+{
+  if (/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/.test(firstName.value))
+  {
+    return (true);
+  }
+  alert("Vous n'avez pas renseigné votre prénom correctement")
+  return (false);
+}
+
+function validateLasttName()
+{
+  if (/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/.test(lastName.value))
+  {
+    return (true);
+  }
+  alert("Vous n'avez pas renseigné votre nom correctement")
+  return (false);
+}
+
+function validateAdress()
+{
+  if (/^[#.0-9a-zA-Z\s,-]+$/.test(adress.value))
+  {
+    return (true);
+  }
+  alert("Vous n'avez pas renseigné une adresse correcte")
+  return (false);
+}
+
+function validateCity()
+{
+  if (/^[a-zA-Z.-]+(?:[\s-][\/a-zA-Z.]+)*$/.test(city.value))
+  {
+    return (true);
+  }
+  alert("Vous n'avez pas renseigné un nom de ville correct")
+  return (false);
+}
+
+
+
+
+
 
