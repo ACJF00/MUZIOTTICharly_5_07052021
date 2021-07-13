@@ -6,8 +6,9 @@ let cartImage = document.createElement("img");
 let teddyName = localStorage.getItem("name");
 let teddyPrice = localStorage.getItem("price");
 let teddyColor = localStorage.getItem("color");
-let teddyId = localStorage.getItem("id")
+let teddyId = localStorage.getItem("id");
 
+/* Display des informations du panier */
 function cartTotal() {
   const cart = localStorage.getItem("panier");
 
@@ -22,7 +23,7 @@ function cartTotal() {
           <div id="container">
           <h1 id="name">${cartProduct.name}</h1>
           <h2 id="color">${cartProduct.color}</h2>
-          <h3 id="price">${cartProduct.price/100} €</h3>
+          <h3 id="price">${cartProduct.price / 100} €</h3>
           </div>
       `;
     }
@@ -30,28 +31,25 @@ function cartTotal() {
 }
 cartTotal();
 
-
-
+/* Calcul et display du prix total */
 function displayTotalPrice() {
   const teddyPrices = JSON.parse(localStorage.getItem("panier"));
 
-  let sum = 0
+  let sum = 0;
   for (let teddyPrice of teddyPrices) {
-    sum += teddyPrice.price/100
+    sum += teddyPrice.price / 100;
   }
   if (sum === 0) {
   } else {
-      document.getElementById("totalPrice").innerHTML = `<h2>Prix total : ${sum} €</h2>`;
-    }
-
+    document.getElementById(
+      "totalPrice"
+    ).innerHTML = `<h2>Prix total : ${sum} €</h2>`;
+    localStorage.setItem("totalPrice", JSON.stringify(sum))
+  }
 }
-displayTotalPrice()
+displayTotalPrice();
 
-
-
-
-
-
+/* Vider le panier */
 document.getElementById("clearCart").onclick = function () {
   clearCart();
 };
@@ -61,120 +59,140 @@ function clearCart() {
   document.location.reload();
 }
 
+/* Fonction de validation des données du formulaire */
+function validateEmail() {
+  if (
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+      email.value
+    )
+  ) {
+    return true;
+  }
+  alert("Vous avez entré une adresse email incorrecte");
+  return false;
+}
 
+function validateFirstName() {
+  if (
+    /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/.test(
+      firstName.value
+    )
+  ) {
+    return true;
+  }
+  alert("Vous n'avez pas renseigné votre prénom correctement");
+  return false;
+}
 
+function validateLastName() {
+  if (
+    /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/.test(lastName.value)
+  ) {
+    return true;
+  }
+  alert("Vous n'avez pas renseigné votre nom correctement");
+  return false;
+}
+
+function validateAddress() {
+  if (/^[#.0-9a-zA-Z\s,-]+$/.test(address.value)) {
+    return true;
+  }
+  alert("Vous n'avez pas renseigné une adresse correcte");
+  return false;
+}
+
+function validateCity() {
+  if (/^[a-zA-Z.-]+(?:[\s-][\/a-zA-Z.]+)*$/.test(city.value)) {
+    return true;
+  }
+  alert("Vous n'avez pas renseigné un nom de ville correct");
+  return false;
+}
+
+/* Soumission du formulaire */
 document.getElementById("submit").onclick = function () {
 
-let panier = localStorage.getItem("panier")
-panier = JSON.parse(panier)
+let panier = localStorage.getItem("panier");
+  panier = JSON.parse(panier);
 
-let tableauID = []
+  let tableauId = [];
 
-for (let elem of panier){
-tableauID.push(elem.id)
-}
-
-const order =
-  {
-    "contact" : {
-    firstName : firstName.value,
-    lastName : lastName.value,
-    email : email.value,
-    adress : adress.value,
-    city : city.value,
-  },
-    products: 
-      tableauID
+  for (let elem of panier) {
+    tableauId.push(elem.id);
   }
 
-  if (validateFirstName() == false)
-  {
+  const order = {
+    contact: {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      address: address.value,
+      city: city.value,
+    },
+    products: tableauId,
+  };
+
+  if (validateFirstName() == false) {
     return false;
-  }
-  localStorage.setItem("contact", JSON.stringify(order));
-
-  if (validateLasttName() == false)
-  {
+  } else if (validateLastName() == false) {
     return false;
-  }
-  localStorage.setItem("contact", JSON.stringify(order));
-
-
-  if (validateEmail() == false)
-  {
+  } else if (validateEmail() == false) {
     return false;
-  }
-  localStorage.setItem("contact", JSON.stringify(order));
-
-  if (validateAdress() == false)
-  {
+  } else if (validateAddress() == false) {
     return false;
-  }
-  localStorage.setItem("contact", JSON.stringify(order));
-
-  if (validateCity() == false)
-  {
+  } else if (validateCity() == false) {
     return false;
+  } else {
+    localStorage.setItem("order", JSON.stringify(order));
+    orderValidation()
   }
-  localStorage.setItem("contact", JSON.stringify(order));
+
+  alert(`Merci ${firstName.value}, votre commande a bien été prise en compte`);
+};
 
 
-alert(`Merci ${firstName.value}, votre commande a bien été prise en compte`);
+/* Order validation */
+async function orderValidation() {
 
-}
+  let panier = localStorage.getItem("panier");
+  panier = JSON.parse(panier);
 
-function validateEmail() 
-{
- if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email.value))
-  {
-    return (true)
+  let tableauId = [];
+
+  for (let elem of panier) {
+    tableauId.push(elem.id);
   }
-    alert("Vous avez entré une adresse email incorrecte")
-    return (false)
+
+  let details = JSON.stringify({
+    // contact
+    contact: {
+      firstName,
+      lastName,
+      email,
+      address,
+      city,
+    },
+    // product
+    products: tableauId,
+  });
+
+  let options = {
+    method: "POST",
+    body: details,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+
+  await fetch("http://localhost:3000/api/teddies/order", options)
+    .then(response => response.json())
+    .then(result =>{
+      localStorage.setItem("orderId", result.orderId),
+      localStorage.setItem("firstName", firstName.value),
+      localStorage.setItem("lastName", lastName.value)
+      })
+      location.href = 'confirm.html'
 }
-
-function validateFirstName()
-{
-  if (/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/.test(firstName.value))
-  {
-    return (true);
-  }
-  alert("Vous n'avez pas renseigné votre prénom correctement")
-  return (false);
-}
-
-function validateLasttName()
-{
-  if (/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/.test(lastName.value))
-  {
-    return (true);
-  }
-  alert("Vous n'avez pas renseigné votre nom correctement")
-  return (false);
-}
-
-function validateAdress()
-{
-  if (/^[#.0-9a-zA-Z\s,-]+$/.test(adress.value))
-  {
-    return (true);
-  }
-  alert("Vous n'avez pas renseigné une adresse correcte")
-  return (false);
-}
-
-function validateCity()
-{
-  if (/^[a-zA-Z.-]+(?:[\s-][\/a-zA-Z.]+)*$/.test(city.value))
-  {
-    return (true);
-  }
-  alert("Vous n'avez pas renseigné un nom de ville correct")
-  return (false);
-}
-
-
-
-
-
 
