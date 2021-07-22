@@ -1,0 +1,89 @@
+
+header{
+    width: 100%;
+    height: 7.1em;
+    background-color: #002EF5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+nav{
+    padding-right: 2em;
+    width: 30%;
+    align-self: center;
+    ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        li{
+            list-style: none;
+        }
+    a{
+        color: white;
+        text-decoration: none;
+        font-size: 1.5em;
+    }
+}
+}
+.content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+            height: 95em;
+            justify-content: space-around;
+            div{
+                width: 47%;
+                align-items: center;
+                background-color: #DCDCDC;
+                border-radius: 10px 10px 10px 10px;
+                height: 29%;
+                &:hover{
+                    box-shadow: 2px 2px 3px grey;
+                }
+                h1{
+                    text-align: center;
+                    font-size: 1.5em;
+                }
+                p{
+                    text-align: center;
+                    button{
+                        border-radius: 10px 10px 10px 10px;
+                        border: none;
+                        padding: 0.7em;
+                        &:hover{
+                            transform:scale(1.1);
+                            font-weight: bold;
+                        }
+                    }
+                }
+        img {
+            width: 100%;
+            text-align: center;
+            height: 63%;
+            object-fit: cover;
+            }
+        a{
+            text-decoration: none;
+        }    
+        }
+
+    }
+}
+
+
+footer{
+    width: 100%;
+    height: 9em;
+    background-color: #002EF5;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    margin-top: 2em;
+}

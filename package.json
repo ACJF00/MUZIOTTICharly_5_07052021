@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "index": "sass --watch ./css/style.scss:./css/style.css",
     "product": "sass --watch ./css/product.scss:./css/product.css",
-    "cart": "sass --watch ./css/cart.scss:./css/cart.css"
+    "cart": "sass --watch ./css/cart.scss:./css/cart.css",
+    "confirm": "sass --watch ./css/confirm.scss:./css/confirm.css"
   },
   "author": "",
   "license": "ISC",

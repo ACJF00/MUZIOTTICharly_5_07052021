@@ -72,6 +72,7 @@ function validateEmail() {
   return false;
 }
 
+/* RegEx */
 function validateFirstName() {
   if (
     /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/.test(
@@ -144,8 +145,7 @@ let panier = localStorage.getItem("panier");
   } else if (validateCity() == false) {
     return false;
   } else {
-    localStorage.setItem("order", JSON.stringify(order));
-    orderValidation()
+    orderValidation(order)
   }
 
   alert(`Merci ${firstName.value}, votre commande a bien été prise en compte`);
@@ -153,33 +153,11 @@ let panier = localStorage.getItem("panier");
 
 
 /* Order validation */
-async function orderValidation() {
-
-  let panier = localStorage.getItem("panier");
-  panier = JSON.parse(panier);
-
-  let tableauId = [];
-
-  for (let elem of panier) {
-    tableauId.push(elem.id);
-  }
-
-  let details = JSON.stringify({
-    // contact
-    contact: {
-      firstName,
-      lastName,
-      email,
-      address,
-      city,
-    },
-    // product
-    products: tableauId,
-  });
+async function orderValidation(panier) {
 
   let options = {
     method: "POST",
-    body: details,
+    body: JSON.stringify(panier),
     headers: {
       "Content-Type": "application/json",
     },
