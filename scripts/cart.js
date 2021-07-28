@@ -164,7 +164,7 @@ async function orderValidation(panier) {
   };
 
 
-  await fetch("http://localhost:3000/api/teddies/order", options)
+  await fetch("https://oc-p5-api.herokuapp.com/api/teddies", options)
     .then(response => response.json())
     .then(result =>{
       localStorage.setItem("orderId", result.orderId),

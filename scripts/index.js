@@ -1,7 +1,7 @@
 
 /* Récupération des données des produits */
 async function fillProducts() {
-    await fetch('http://localhost:3000/api/teddies')
+    await fetch('https://oc-p5-api.herokuapp.com/api/teddies')
       .then((response) => response.json())
       .then((nounours) => {
         for (let elem of nounours) {
