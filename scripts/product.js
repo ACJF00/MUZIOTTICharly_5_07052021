@@ -23,7 +23,7 @@ function fillCart(teddyInfos) {
 
 /* Display des informations produits en fonction des données de l'API */
 async function teddyDetails() {
-  await fetch(`https://oc-p5-api.herokuapp.com/api/teddies/${product}`)
+  await fetch(`http://localhost:3000/api/teddies/${product}`)
     .then((response) => response.json())
     .then((teddyInfos) => {
     let products = document.getElementById('products')
